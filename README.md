@@ -1,4 +1,44 @@
-Four combos. Each is a full `:root {}` block — paste it over the existing one.
+```markdown
+# The Universal Skill Formula
+
+A cross-platform reference document for engineers and developers 
+building production-grade AI skills, system prompts, and behavioral 
+directives across Claude, GPT-5.5, Gemini 3.x, DeepSeek V4, 
+Llama 4, Mistral, and Qwen 3.
+
+All specifications are cross-verified against official platform 
+documentation. Updated May 2026. No boilerplate. No filler. 
+No second pass needed.
+
+## What's inside
+
+- Platform-agnostic 9-block skill architecture
+- Claude .skill file exact format and YAML rules
+- GPT-5.5 outcome-first prompting (migration from legacy stacks)
+- Gemini 3 system_instruction hierarchy and thinking levels
+- DeepSeek V4 XML context tagging and mode selection
+- Open-weight model patterns (Llama 4 / Mistral / Qwen 3)
+- Copy-deploy cross-platform master template
+- Awwwards/Behance-level design directive system
+- Banned patterns table with replacements
+- Zero-error pre-deployment QA checklist
+
+## Usage
+
+Open `universal-skill-formula.html` in any browser. No build 
+step. No dependencies. No network required after load.
+
+To swap the color theme, replace the `:root {}` block in the 
+`<style>` tag with any combo from `THEMES.md`.
+
+## Sources
+
+- https://docs.claude.com
+- https://platform.openai.com/docs/guides/prompt-engineering
+- https://ai.google.dev/api/generate-content
+- https://deepseekai.guide/tutorials/deepseek-prompt-engineering
+- https://www.llama.com/docs/how-to-guides/prompting
+```
 
 ---
 
@@ -336,49 +376,6 @@ White ground, storm grey depth, single electric blue spike. Muji hardware lab.
 **PRO TIP — Mixing signal colors**
 `--border-hot` is the highest-attention color in the system — it outlines the formula blocks and active badges. Make it the color you want readers to *feel* first. Everything else can be subordinate. If `--border-hot` and `--accent` are the same hue, the doc reads as monochromatic. Split them by at least 120° on the color wheel for maximum snap.
 
-**README.md**
-
-```markdown
-# The Universal Skill Formula
-
-A cross-platform reference document for engineers and developers 
-building production-grade AI skills, system prompts, and behavioral 
-directives across Claude, GPT-5.5, Gemini 3.x, DeepSeek V4, 
-Llama 4, Mistral, and Qwen 3.
-
-All specifications are cross-verified against official platform 
-documentation. Updated May 2026. No boilerplate. No filler. 
-No second pass needed.
-
-## What's inside
-
-- Platform-agnostic 9-block skill architecture
-- Claude .skill file exact format and YAML rules
-- GPT-5.5 outcome-first prompting (migration from legacy stacks)
-- Gemini 3 system_instruction hierarchy and thinking levels
-- DeepSeek V4 XML context tagging and mode selection
-- Open-weight model patterns (Llama 4 / Mistral / Qwen 3)
-- Copy-deploy cross-platform master template
-- Awwwards/Behance-level design directive system
-- Banned patterns table with replacements
-- Zero-error pre-deployment QA checklist
-
-## Usage
-
-Open `universal-skill-formula.html` in any browser. No build 
-step. No dependencies. No network required after load.
-
-To swap the color theme, replace the `:root {}` block in the 
-`<style>` tag with any combo from `THEMES.md`.
-
-## Sources
-
-- https://docs.claude.com
-- https://platform.openai.com/docs/guides/prompt-engineering
-- https://ai.google.dev/api/generate-content
-- https://deepseekai.guide/tutorials/deepseek-prompt-engineering
-- https://www.llama.com/docs/how-to-guides/prompting
-```
 ---
 
 **WCAG AA floor:** `--text` on `--bg` ≥ 4.5:1. `--muted` on `--bg` ≥ 3:1 (used at large size only). Every combo below clears both.
