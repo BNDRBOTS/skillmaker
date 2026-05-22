@@ -8,24 +8,25 @@
   @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
 
 :root {
-  --bg: #f0f4f8;
-  --surface: #e4eaf0;
-  --surface2: #d8e0ea;
-  --border: #b8c8d8;
-  --border-hot: #0022cc;
-  --text: #080c14;
-  --muted: #445566;
-  --accent: #0022cc;
-  --accent2: #cc0033;
-  --accent3: #0033dd;
+  --bg: #f5f0e8;
+  --surface: #ede7d8;
+  --surface2: #e2dbc8;
+  --code-bg: #1a1814;
+  --border: #c8c0aa;
+  --border-hot: #c41a00;
+  --text: #0e0c08;
+  --muted: #5a5040;
+  --accent: #c41a00;
+  --accent2: #004499;
+  --accent3: #b83800;
   --accent4: #000000;
-  --claude: #cc3300;
-  --openai: #007744;
-  --gemini: #0022cc;
-  --deepseek: #5500bb;
-  --meta: #0033bb;
-  --mistral: #cc2200;
-  --qwen: #7700bb;
+  --claude: #b83000;
+  --openai: #005530;
+  --gemini: #003399;
+  --deepseek: #550099;
+  --meta: #003388;
+  --mistral: #b82800;
+  --qwen: #660099;
 }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -243,7 +244,7 @@
 
   /* ── CODE BLOCKS ── */
   .code-block {
-    background: #07070f;
+  background: var(--code-bg);
     border: 1px solid var(--border);
     border-radius: 0;
     padding: 0;
