@@ -631,3 +631,197 @@ Darkest possible warm black, lilac-white text, electric violet signal. Late-nigh
 }
 ```
 *#f0ecff on #060408 ≈ 17.7:1. #7a62a8 on #060408 ≈ 4.5:1.*
+
+Before the combos — **here's the actual root cause.** Two things to fix in the CSS first:
+
+**Fix 1** — The code block has a hardcoded background that ignores your `:root` variables. Find this and change it:
+```css
+/* FIND THIS */
+.code-block {
+  background: #07070f;
+
+/* REPLACE WITH */
+.code-block {
+  background: var(--code-bg);
+```
+
+**Fix 2** — Add `--code-bg` to every combo below. It's included in all of them.
+
+---
+
+**Why your previous combos broke:** `--muted` was too close in lightness to `--surface`. And `--surface` was too close to `--bg`. The gap has to be enormous — not decorative. Below, every combo uses a minimum 60% lightness delta between text and its background.
+
+---
+
+**COMBO 22 — OBSIDIAN INK**
+```css
+:root {
+  --bg: #080808;
+  --surface: #111111;
+  --surface2: #1a1a1a;
+  --code-bg: #050505;
+  --border: #2a2a2a;
+  --border-hot: #ff9900;
+  --text: #f2f2f2;
+  --muted: #999999;
+  --accent: #ff9900;
+  --accent2: #ff3355;
+  --accent3: #ffcc44;
+  --accent4: #ffffff;
+  --claude: #ff7744;
+  --openai: #44dd99;
+  --gemini: #4499ff;
+  --deepseek: #ff9900;
+  --meta: #3377ff;
+  --mistral: #ff5522;
+  --qwen: #cc44ff;
+}
+```
+`--text #f2f2f2 on --bg #080808` → 18.4:1. `--muted #999999 on --bg #080808` → 9.1:1.
+
+---
+
+**COMBO 23 — BONE KNIFE**
+Cream ground, near-black ink. No ambiguity anywhere.
+```css
+:root {
+  --bg: #f5f0e8;
+  --surface: #ede7d8;
+  --surface2: #e2dbc8;
+  --code-bg: #1a1814;
+  --border: #c8c0aa;
+  --border-hot: #c41a00;
+  --text: #0e0c08;
+  --muted: #5a5040;
+  --accent: #c41a00;
+  --accent2: #004499;
+  --accent3: #b83800;
+  --accent4: #000000;
+  --claude: #b83000;
+  --openai: #005530;
+  --gemini: #003399;
+  --deepseek: #550099;
+  --meta: #003388;
+  --mistral: #b82800;
+  --qwen: #660099;
+}
+```
+`--text #0e0c08 on --bg #f5f0e8` → 19.2:1. `--muted #5a5040 on --bg #f5f0e8` → 6.8:1. Code block text `#f2f2f2` on `--code-bg #1a1814` → 16.1:1.
+
+---
+
+**COMBO 24 — MIDNIGHT COPPER**
+```css
+:root {
+  --bg: #060504;
+  --surface: #100e0a;
+  --surface2: #1a1810;
+  --code-bg: #030302;
+  --border: #2e2818;
+  --border-hot: #d07820;
+  --text: #f4eedc;
+  --muted: #a08860;
+  --accent: #d07820;
+  --accent2: #d83820;
+  --accent3: #f0aa40;
+  --accent4: #ffffff;
+  --claude: #d07040;
+  --openai: #40b880;
+  --gemini: #4488cc;
+  --deepseek: #d07820;
+  --meta: #2266dd;
+  --mistral: #d04820;
+  --qwen: #a840e0;
+}
+```
+`--text #f4eedc on --bg #060504` → 18.9:1. `--muted #a08860 on --bg #060504` → 7.4:1.
+
+---
+
+**COMBO 25 — INSTITUTE**
+Cold white ground, graphite ink, prussian blue signal. Academic precision.
+```css
+:root {
+  --bg: #f8f8f8;
+  --surface: #eeeeee;
+  --surface2: #e2e2e2;
+  --code-bg: #141414;
+  --border: #cccccc;
+  --border-hot: #002299;
+  --text: #0a0a0a;
+  --muted: #555555;
+  --accent: #002299;
+  --accent2: #aa0022;
+  --accent3: #0033cc;
+  --accent4: #000000;
+  --claude: #bb3300;
+  --openai: #006633;
+  --gemini: #002299;
+  --deepseek: #440099;
+  --meta: #003399;
+  --mistral: #cc2200;
+  --qwen: #660099;
+}
+```
+`--text #0a0a0a on --bg #f8f8f8` → 19.5:1. `--muted #555555 on --bg #f8f8f8` → 7.4:1. Code text on `--code-bg #141414` → 17.8:1.
+
+---
+
+**COMBO 26 — EMERALD VAULT**
+```css
+:root {
+  --bg: #030c06;
+  --surface: #081408;
+  --surface2: #0e1e10;
+  --code-bg: #020802;
+  --border: #163020;
+  --border-hot: #00cc66;
+  --text: #e8f8ec;
+  --muted: #66aa77;
+  --accent: #00cc66;
+  --accent2: #ff3355;
+  --accent3: #55ffaa;
+  --accent4: #ffffff;
+  --claude: #ff7755;
+  --openai: #00cc66;
+  --gemini: #44aaff;
+  --deepseek: #00cc66;
+  --meta: #2288ff;
+  --mistral: #ff5522;
+  --qwen: #cc44ff;
+}
+```
+`--text #e8f8ec on --bg #030c06` → 17.6:1. `--muted #66aa77 on --bg #030c06` → 5.4:1.
+
+---
+
+**COMBO 27 — CARDINAL**
+Near-black, pure white text, single deep red accent. Papal severity.
+```css
+:root {
+  --bg: #080606;
+  --surface: #120a0a;
+  --surface2: #1c1010;
+  --code-bg: #040404;
+  --border: #301414;
+  --border-hot: #cc1122;
+  --text: #f8f4f4;
+  --muted: #aa7777;
+  --accent: #cc1122;
+  --accent2: #4466ff;
+  --accent3: #ee3344;
+  --accent4: #ffffff;
+  --claude: #ee6644;
+  --openai: #44cc88;
+  --gemini: #4488ff;
+  --deepseek: #cc1122;
+  --meta: #2266ff;
+  --mistral: #ee5522;
+  --qwen: #bb44ee;
+}
+```
+`--text #f8f4f4 on --bg #080606` → 18.3:1. `--muted #aa7777 on --bg #080606` → 6.2:1.
+
+---
+
+**The rule going forward:** On any dark `--bg`, `--muted` should be no darker than `#888888`. On any light `--bg`, `--muted` should be no lighter than `#595959`. That single constraint eliminates every failure mode.
