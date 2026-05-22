@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal AI Skill Formula — May 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap');
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #10101a;
+    --surface2: #161625;
+    --border: #22223a;
+    --border-hot: #4040ff;
+    --text: #e8e8f0;
+    --muted: #6868a0;
+    --accent: #5c5cff;
+    --accent2: #ff4d6d;
+    --accent3: #00e5b0;
+    --accent4: #ffd166;
+    --claude: #e07a5f;
+    --openai: #10a37f;
+    --gemini: #4285f4;
+    --deepseek: #5a67ff;
+    --meta: #0866ff;
+    --mistral: #ff6b35;
+    --qwen: #a855f7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: 80px 48px 60px;
+    border-bottom: 1px solid var(--border);
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(92,92,255,0.12) 0%, transparent 70%);
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 119px,
+      rgba(255,255,255,0.015) 120px
+    );
+  }
+  .hero-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 6vw, 72px);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    max-width: 900px;
+    background: linear-gradient(135deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero h1 span {
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    margin-top: 24px;
+    color: var(--muted);
+    font-size: 13px;
+    max-width: 600px;
+    line-height: 1.6;
+  }
+  .hero-meta {
+    margin-top: 32px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .badge.hot { border-color: var(--accent); color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .wrapper { max-width: 1200px; margin: 0 auto; }
+  .content { padding: 0 48px 80px; }
+
+  /* ── TOC ── */
+  .toc {
+    margin: 48px 0;
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+  }
+  .toc-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .toc a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    padding: 3px 0;
+    transition: color 0.2s;
+  }
+  .toc a:hover { color: var(--text); }
+  .toc a span { color: var(--border-hot); margin-right: 8px; }
+
+  /* ── SECTION HEADERS ── */
+  .section { margin-top: 72px; }
+  .section-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(22px, 3vw, 32px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 32px 0 12px;
+  }
+  h4 {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent3);
+    margin: 24px 0 8px;
+    font-family: 'Space Mono', monospace;
+  }
+  p {
+    color: rgba(232,232,240,0.8);
+    margin-bottom: 14px;
+    font-size: 13.5px;
+  }
+
+  /* ── PLATFORM CARDS ── */
+  .platform-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin: 32px 0;
+  }
+  .pcard {
+    background: var(--surface);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .pcard::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .pcard.claude::before { background: var(--claude); }
+  .pcard.openai::before { background: var(--openai); }
+  .pcard.gemini::before { background: var(--gemini); }
+  .pcard.deepseek::before { background: var(--deepseek); }
+  .pcard.meta::before { background: var(--meta); }
+  .pcard.mistral::before { background: var(--mistral); }
+  .pcard.qwen::before { background: var(--qwen); }
+  .pcard:hover { background: var(--surface2); }
+  .pcard-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .pcard.claude .pcard-name { color: var(--claude); }
+  .pcard.openai .pcard-name { color: var(--openai); }
+  .pcard.gemini .pcard-name { color: var(--gemini); }
+  .pcard.deepseek .pcard-name { color: var(--deepseek); }
+  .pcard.meta .pcard-name { color: var(--meta); }
+  .pcard.mistral .pcard-name { color: var(--mistral); }
+  .pcard.qwen .pcard-name { color: var(--qwen); }
+  .pcard-model {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    font-family: 'Space Mono', monospace;
+  }
+
+  /* ── CODE BLOCKS ── */
+  .code-block {
+    background: #07070f;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    padding: 0;
+    margin: 16px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .code-block-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .code-block pre {
+    padding: 20px;
+    overflow-x: auto;
+    font-family: 'Space Mono', monospace;
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--text);
+  }
+  .code-block pre code {
+    color: var(--text);
+  }
+
+  /* Syntax-ish coloring */
+  .kw { color: #818cf8; }   /* keyword / structural */
+  .str { color: #86efac; }  /* strings / values */
+  .cmt { color: #4a4a70; }  /* comments */
+  .tag { color: #f9a8d4; }  /* XML/tags */
+  .key { color: #fbbf24; }  /* keys */
+  .num { color: #fb923c; }  /* numbers */
+  .fn { color: #67e8f9; }   /* function/command names */
+
+  /* ── RULE BLOCKS ── */
+  .rule-block {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    margin: 16px 0;
+    overflow: hidden;
+  }
+  .rule-block-title {
+    background: var(--surface2);
+    padding: 8px 16px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  .rule-block-title.warn { color: var(--accent2); border-color: rgba(255,77,109,0.3); background: rgba(255,77,109,0.06); }
+  .rule-block-title.good { color: var(--accent3); border-color: rgba(0,229,176,0.3); background: rgba(0,229,176,0.06); }
+  .rule-block-title.info { color: var(--accent4); border-color: rgba(255,209,102,0.3); background: rgba(255,209,102,0.06); }
+  .rule-block-title.accent { color: var(--accent); border-color: rgba(92,92,255,0.3); background: rgba(92,92,255,0.06); }
+  .rule-block-body { padding: 16px 20px; }
+  .rule-block-body ul { padding-left: 18px; }
+  .rule-block-body li { margin-bottom: 8px; color: rgba(232,232,240,0.8); font-size: 13px; }
+  .rule-block-body li::marker { color: var(--accent); }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 12px;
+  }
+  .compare-table th {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 10px 16px;
+    text-align: left;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+  .compare-table td {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    color: rgba(232,232,240,0.8);
+    font-size: 12px;
+    font-family: 'DM Mono', monospace;
+  }
+  .compare-table tr:hover td { background: var(--surface); }
+  .yes { color: var(--accent3); }
+  .no { color: var(--accent2); }
+  .partial { color: var(--accent4); }
+
+  /* ── CALLOUTS ── */
+  .callout {
+    padding: 16px 20px;
+    margin: 20px 0;
+    border-left: 3px solid;
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(232,232,240,0.85);
+  }
+  .callout.warn { border-color: var(--accent2); background: rgba(255,77,109,0.06); }
+  .callout.tip { border-color: var(--accent3); background: rgba(0,229,176,0.06); }
+  .callout.info { border-color: var(--accent); background: rgba(92,92,255,0.06); }
+  .callout strong { color: #fff; }
+
+  /* ── FORMULA DISPLAY ── */
+  .formula {
+    background: #07070f;
+    border: 1px solid var(--border-hot);
+    padding: 28px 32px;
+    margin: 24px 0;
+    position: relative;
+  }
+  .formula::before {
+    content: 'FORMULA';
+    position: absolute;
+    top: -1px; left: 24px;
+    font-family: 'Space Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    padding: 2px 8px;
+    background: var(--border-hot);
+    color: #fff;
+  }
+  .formula-body {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+    color: var(--accent3);
+  }
+  .formula-body .fop { color: var(--muted); }
+  .formula-body .fval { color: #fff; }
+  .formula-body .feq { color: var(--accent4); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    margin: 48px 0;
+  }
+
+  /* ── PILL TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+  .tag-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 9px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .tag-pill.active { border-color: var(--accent); color: var(--accent); }
+
+  /* ── FOOTER ── */
+  .footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-text {
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── UTILITY ── */
+  strong { color: #fff; font-weight: 600; }
+  em { color: var(--accent4); font-style: italic; }
+  .mono { font-family: 'Space Mono', monospace; font-size: 11px; color: var(--accent3); }
+  .platform-chip {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin-right: 4px;
+    font-weight: 700;
+  }
+  .chip-claude { background: rgba(224,122,95,0.15); color: var(--claude); }
+  .chip-openai { background: rgba(16,163,127,0.15); color: var(--openai); }
+  .chip-gemini { background: rgba(66,133,244,0.15); color: var(--gemini); }
+  .chip-deepseek { background: rgba(90,103,255,0.15); color: var(--deepseek); }
+  .chip-meta { background: rgba(8,102,255,0.15); color: var(--meta); }
+  .chip-mistral { background: rgba(255,107,53,0.15); color: var(--mistral); }
+  .chip-qwen { background: rgba(168,85,247,0.15); color: var(--qwen); }
+  .chip-all { background: rgba(0,229,176,0.12); color: var(--accent3); }
+
+  @media (max-width: 768px) {
+    .hero, .content, .footer { padding-left: 20px; padding-right: 20px; }
+    .hero { padding-top: 48px; }
+    .platform-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-tag">Cross-Platform Skill Engineering · May 2026 Edition · Cross-Verified</span>
+  <h1>THE UNIVERSAL<br><span>SKILL FORMULA</span></h1>
+  <p class="hero-sub">
+    Exact, verified specifications for creating production-grade skills, system prompts, and 
+    behavioral directives that process with zero errors across every major AI platform. 
+    No boilerplate. No guesswork. No second pass needed.
+  </p>
+  <div class="hero-meta">
+    <span class="badge hot">Claude Opus 4.7 / Sonnet 4.6</span>
+    <span class="badge hot">GPT-5.5</span>
+    <span class="badge hot">Gemini 3.1 Pro</span>
+    <span class="badge hot">DeepSeek V4</span>
+    <span class="badge">Llama 4</span>
+    <span class="badge">Mistral Large 3</span>
+    <span class="badge">Qwen 3</span>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- TOC -->
+<div class="toc">
+  <div class="toc-title">// Contents</div>
+  <a href="#part1"><span>01</span>The Universal Cognitive Architecture — What Every Model Shares</a>
+  <a href="#part2"><span>02</span>The Skill Anatomy — Platform-Agnostic Master Formula</a>
+  <a href="#part3"><span>03</span>Claude (Anthropic) — Official .skill Format, Opus 4.7 Tuning</a>
+  <a href="#part4"><span>04</span>OpenAI GPT-5.5 — System Prompt Architecture & Outcome-First Prompting</a>
+  <a href="#part5"><span>05</span>Google Gemini 3.x — system_instruction Hierarchy & Thinking Levels</a>
+  <a href="#part6"><span>06</span>DeepSeek V4 — XML-Tagged Context, Mode Selection, Prefix Completion</a>
+  <a href="#part7"><span>07</span>Meta Llama 4 / Mistral / Qwen 3 — Open-Weight Models</a>
+  <a href="#part8"><span>08</span>Cross-Platform Skill Template (Copy-Deploy)</a>
+  <a href="#part9"><span>09</span>Production-Grade Directives — Awwwards / Behance Level Output</a>
+  <a href="#part10"><span>10</span>Banned Patterns & Anti-Boilerplate Enforcement</a>
+  <a href="#part11"><span>11</span>The QA Gate — Zero-Error Verification Checklist</a>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part1">
+  <div class="section-label">01</div>
+  <h2>The Universal Cognitive Architecture</h2>
+
+  <p>Every model — regardless of lab or architecture — processes behavioral directives through a shared cognitive hierarchy. Understanding this hierarchy is the foundation of error-free cross-platform skills.</p>
+
+  <div class="formula">
+    <div class="formula-body">
+      <span class="fop">[LAYER 1]</span> <span class="fval">IDENTITY</span>   <span class="feq">→</span> Who/what the model is in this context<br>
+      <span class="fop">[LAYER 2]</span> <span class="fval">DOMAIN</span>     <span class="feq">→</span> What subject matter governs the task<br>
+      <span class="fop">[LAYER 3]</span> <span class="fval">CONSTRAINTS</span> <span class="feq">→</span> Hard limits on output shape, length, format<br>
+      <span class="fop">[LAYER 4]</span> <span class="fval">EXECUTION</span>   <span class="feq">→</span> Ordered steps + divergence rules<br>
+      <span class="fop">[LAYER 5]</span> <span class="fval">QUALITY GATE</span><span class="feq">→</span> Self-verification before returning output<br>
+      <span class="fop">[INJECT]</span>   <span class="fval">CONTEXT</span>     <span class="feq">→</span> Dynamic user data placed last (cache-optimized)
+    </div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-block-title good">Universal Laws — True on Every Platform</div>
+    <div class="rule-block-body">
+      <ul>
+        <li><strong>Static before dynamic.</strong> Every platform benefits from cache-prefix optimization: place fixed instructions first, variable user content last.</li>
+        <li><strong>Constraints must be enforceable.</strong> "Good output" is not a constraint. "≤3 paragraphs, no markdown headers, response ends with a code block" is.</li>
+        <li><strong>Positive examples outperform prohibitions.</strong> "Format like this: [EXAMPLE]" is processed more reliably than "Don't format like [BAD EXAMPLE]".</li>
+        <li><strong>Structured markup improves context parsing.</strong> XML tags, markdown headers, and JSON keys all act as attention anchors. Use them deliberately.</li>
+        <li><strong>Specify the success condition explicitly.</strong> If the model can check its own output against a criterion, output quality increases 30–60% across all tested models.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part2">
+  <div class="section-label">02</div>
+  <h2>The Platform-Agnostic Master Formula</h2>
+  <p>This is the canonical 9-block structure that maps cleanly onto every platform's native format. Each block is described below, then rendered per-platform in sections 03–07.</p>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>MASTER SKILL TEMPLATE — PLATFORM AGNOSTIC</span>
+      <span class="chip-all">ALL MODELS</span>
+    </div>
+    <pre><code><span class="cmt"># ─────────────────────────────────────────
+# BLOCK 1: IDENTITY + MODE DECLARATION
+# ─────────────────────────────────────────</span>
+<span class="kw">ROLE:</span>      <span class="str">[Specific role, not "helpful assistant"]</span>
+<span class="kw">MODE:</span>      <span class="str">[Chat | Agent | API | One-shot | Agentic-loop]</span>
+<span class="kw">VERSION:</span>   <span class="str">[Target model string — pin this in production]</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 2: DOMAIN SCOPE
+# ─────────────────────────────────────────</span>
+<span class="kw">DOMAIN:</span>         <span class="str">[Single sentence: what field this governs]</span>
+<span class="kw">IN_SCOPE:</span>       <span class="str">[Explicit list of covered topics/tasks]</span>
+<span class="kw">OUT_OF_SCOPE:</span>   <span class="str">[What to decline or redirect — do not leave implicit]</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 3: OUTPUT SPECIFICATION (HARD CONSTRAINTS)
+# ─────────────────────────────────────────</span>
+<span class="kw">FORMAT:</span>     <span class="str">[Exact format: markdown | JSON | prose | HTML]</span>
+<span class="kw">LENGTH:</span>     <span class="str">[≤N words | N–M sentences | exact token budget]</span>
+<span class="kw">STRUCTURE:</span>  <span class="str">[Required output sections, in order]</span>
+<span class="kw">BANNED:</span>     <span class="str">[Grep-checkable banned patterns — zero vague entries]</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 4: DIVERGENCE AXES (anti-default enforcement)
+# ─────────────────────────────────────────</span>
+<span class="kw">AXIS_1:</span>  <span class="str">[Named axis where output must diverge from average]</span>
+<span class="kw">AXIS_2:</span>  <span class="str">[Second axis]</span>
+<span class="kw">AXIS_3:</span>  <span class="str">[Third axis — minimum 3 for production-grade skills]</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 5: EXECUTION SEQUENCE
+# ─────────────────────────────────────────</span>
+<span class="kw">STEP 1:</span>  <span class="str">[Imperative verb + action. No optional steps inline.]</span>
+<span class="kw">STEP 2:</span>  <span class="str">[Each step produces a checkable artifact]</span>
+<span class="kw">STEP N:</span>  <span class="str">[Final step is always output delivery]</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 6: EXAMPLES (2–3 max)
+# ─────────────────────────────────────────</span>
+<span class="kw">EXAMPLE_INPUT:</span>   <span class="str">[Representative input]</span>
+<span class="kw">EXAMPLE_OUTPUT:</span>  <span class="str">[Ideal output — this is the behavior anchor]</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 7: QUALITY GATE (model self-checks before output)
+# ─────────────────────────────────────────</span>
+<span class="kw">BEFORE_RETURNING:</span>
+<span class="str">  □ Output matches FORMAT specification exactly
+  □ Length within constraint
+  □ No banned patterns present
+  □ All AXIS rules visibly enforced
+  □ Output does not read as statistically average</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 8: CONTEXT INJECTION ZONE (dynamic — place last)
+# ─────────────────────────────────────────</span>
+<span class="kw">USER_CONTEXT:</span>  <span class="str">{{dynamic_input_here}}</span>
+
+<span class="cmt"># ─────────────────────────────────────────
+# BLOCK 9: FALLBACK BEHAVIOR
+# ─────────────────────────────────────────</span>
+<span class="kw">IF_AMBIGUOUS:</span>   <span class="str">[State one clarifying question, then proceed with stated assumption]</span>
+<span class="kw">IF_OUT_OF_SCOPE:</span><span class="str">[Exact redirect behavior — never just "I can't help"]</span></code></pre>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part3">
+  <div class="section-label">03</div>
+  <h2>Claude (Anthropic) — Official .skill Format</h2>
+  <div class="tags">
+    <span class="tag-pill active">Opus 4.7</span>
+    <span class="tag-pill active">Sonnet 4.6</span>
+    <span class="tag-pill active">Haiku 4.5</span>
+    <span class="tag-pill">Claude Code v2.x</span>
+  </div>
+
+  <p>Claude's native skill format is the <strong>SKILL.md spec</strong> — a Markdown file with YAML frontmatter, loaded into context via the skills system. This is the <em>only</em> first-party, officially supported skill container format Anthropic ships. Everything else is a system prompt, not a skill.</p>
+
+  <div class="callout info">
+    <strong>Verified May 2026:</strong> The current Claude family is Opus 4.7, Sonnet 4.6, and Haiku 4.5. Opus 4.7 introduces <code>xhigh</code> effort level, stricter literal instruction following, and stronger design instincts with a persistent default of warm cream palettes — requires explicit override for non-editorial UI work.
+  </div>
+
+  <h3>The .skill File Formula</h3>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>SKILL.md — EXACT FORMAT (CLAUDE ONLY)</span>
+      <span class="platform-chip chip-claude">Claude</span>
+    </div>
+    <pre><code><span class="cmt">---                                         ← line 1: exactly three dashes</span>
+<span class="key">name</span>: <span class="str">your-skill-name</span>                       <span class="cmt">← line 2: kebab-case, matches folder + .skill filename</span>
+<span class="key">description</span>: <span class="str">One-line plain text. What it does. Domain. Trigger phrase 1, trigger phrase 2, trigger phrase 3. Always use this skill even when the user does not say [X] if [Y] is present.</span>
+<span class="cmt">---                                         ← line 4: closing delimiter</span>
+<span class="cmt">                                            ← line 5: blank line (mandatory)</span>
+<span class="cmt"># Skill Title                               ← line 6: human-readable H1</span>
+
+<span class="cmt">## MODE</span>
+<span class="cmt">Declare behavioral baseline: output format, default vs toggle behaviors,</span>
+<span class="cmt">domain-specific defaults that must precede rule evaluation.</span>
+
+<span class="cmt">## DOMAIN SYSTEMS</span>
+
+<span class="cmt">### [System 1 Name]</span>
+<span class="cmt">[Rules with ≥ / ≤ / exact values — no vague guidance]</span>
+
+<span class="cmt">### [System 2 Name]</span>
+<span class="cmt">[Enforceable rules]</span>
+
+<span class="cmt">### [System 3 Name]  ← minimum 3 systems or domain is under-specified</span>
+<span class="cmt">[Enforceable rules]</span>
+
+<span class="cmt">## BANNED PATTERNS</span>
+<span class="cmt">- [Grep-checkable ban — specific enough to fail inspection]</span>
+<span class="cmt">- [No entries like "bad output" — unenforceable, rejected]</span>
+
+<span class="cmt">## REQUIRED ELEMENTS</span>
+<span class="cmt">- [Binary — present or absent, no partial credit]</span>
+
+<span class="cmt">## EXECUTION SEQUENCE</span>
+<span class="cmt">1. [Imperative verb. Strictly ordered.]</span>
+<span class="cmt">2. [No optional steps inline]</span>
+
+<span class="cmt">## DELIVERY</span>
+<span class="cmt">[File type, naming convention, packaging rules]</span>
+<span class="cmt">[OR: No domain-specific delivery constraints. Return output inline.]</span>
+
+<span class="cmt">## QA CHECKLIST</span>
+<span class="cmt">- [ ] Binary pass/fail only — no subjective items</span>
+
+<span class="cmt">## FINAL VALIDATION GATES</span>
+<span class="cmt">- Output does not read as statistically average for this domain</span>
+<span class="cmt">- All ≥3 divergence axes visibly enforced</span>
+<span class="cmt">- No banned pattern in final output</span></code></pre>
+  </div>
+
+  <h3>Claude XML Structuring (API / System Prompt)</h3>
+  <p>When building <em>system prompts</em> (as opposed to .skill files), Claude processes XML tags as first-class context delimiters. This is documented and tested in official Anthropic prompt engineering guidance.</p>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>XML SYSTEM PROMPT — CLAUDE API</span>
+      <span class="platform-chip chip-claude">Claude</span>
+    </div>
+    <pre><code><span class="tag">&lt;system&gt;</span>
+  <span class="tag">&lt;identity&gt;</span>
+    You are [ROLE]. [One sentence of persona context. No "helpful AI" filler.]
+  <span class="tag">&lt;/identity&gt;</span>
+
+  <span class="tag">&lt;domain&gt;</span>
+    [What this assistant covers. Keep to 2–3 sentences max.]
+  <span class="tag">&lt;/domain&gt;</span>
+
+  <span class="tag">&lt;output_rules&gt;</span>
+    FORMAT: [exact format]
+    LENGTH: [constraint with number — not "concise"]
+    STRUCTURE: [required sections in order]
+  <span class="tag">&lt;/output_rules&gt;</span>
+
+  <span class="tag">&lt;banned&gt;</span>
+    NEVER: [pattern 1]
+    NEVER: [pattern 2]
+  <span class="tag">&lt;/banned&gt;</span>
+
+  <span class="tag">&lt;quality_gate&gt;</span>
+    Before returning any output, confirm:
+    1. Format matches output_rules exactly
+    2. No banned patterns present
+    3. Output is non-generic for this domain
+  <span class="tag">&lt;/quality_gate&gt;</span>
+<span class="tag">&lt;/system&gt;</span>
+
+<span class="cmt">&lt;!-- Dynamic context is injected at message level, NOT in system --&gt;</span></code></pre>
+  </div>
+
+  <h3>Opus 4.7 — Critical Tuning Points (Verified from Official Docs)</h3>
+  <div class="rule-block">
+    <div class="rule-block-title info">Effort Levels — New in Opus 4.7</div>
+    <div class="rule-block-body">
+      <ul>
+        <li><strong>xhigh</strong> (new): Best setting for coding and agentic use cases. Use this as the default for production agent skills.</li>
+        <li><strong>high</strong>: Balanced token/intelligence. Minimum for intelligence-sensitive tasks.</li>
+        <li><strong>medium</strong>: Cost-sensitive. If you see under-thinking at medium, raise to high — do NOT add prompting complexity to compensate.</li>
+        <li><strong>low</strong>: Short, scoped, latency-sensitive tasks only. At low effort, Opus 4.7 scopes strictly to what was asked.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="rule-block">
+    <div class="rule-block-title warn">Opus 4.7 Behavior Changes — Must-Know</div>
+    <div class="rule-block-body">
+      <ul>
+        <li><strong>Literal instruction following:</strong> 4.7 does NOT generalize instructions from one item to another. If you want a rule applied broadly, state the scope explicitly: "Apply this formatting to every section."</li>
+        <li><strong>Design defaults:</strong> Opus 4.7 defaults to warm cream backgrounds (~#F4F1EA), serif display type, and terracotta accents. This persists through generic overrides like "make it minimal." <em>Specify a concrete alternative with hex values.</em></li>
+        <li><strong>Subagent spawning:</strong> Spawns fewer subagents by default. Explicitly instruct when fan-out is desired.</li>
+        <li><strong>Tool use:</strong> 4.7 reasons more, tool-calls less vs. 4.6. If you need tool usage, raise effort to high/xhigh and explicitly instruct when to call tools.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>PACKAGING RULE — .skill FILE</span>
+      <span class="platform-chip chip-claude">Claude</span>
+    </div>
+    <pre><code><span class="cmt"># Folder structure (zip root, not subfolder)</span>
+your-skill-name/
+  └── SKILL.md
+
+<span class="cmt"># Output file</span>
+your-skill-name.skill   <span class="cmt">← zip of the folder above</span>
+
+<span class="cmt"># Validation: SKILL.md must sit at zip root — not inside subfolder</span>
+<span class="cmt"># Name key in YAML must match folder name and .skill filename exactly</span></code></pre>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part4">
+  <div class="section-label">04</div>
+  <h2>OpenAI GPT-5.5 — System Prompt Architecture</h2>
+  <div class="tags">
+    <span class="tag-pill active">GPT-5.5</span>
+    <span class="tag-pill active">GPT-5.5 Pro</span>
+    <span class="tag-pill">GPT-5.5 Thinking</span>
+    <span class="tag-pill">Responses API</span>
+  </div>
+
+  <p>GPT-5.5 (released April 23, 2026, API on April 24) fundamentally changes prompting philosophy. The official GPT-5.5 prompting guide states: <em>start from scratch — do not carry over legacy prompt stacks from GPT-5.4 or earlier models.</em></p>
+
+  <div class="callout tip">
+    <strong>GPT-5.5 Core Principle:</strong> Define the destination, not the route. "GPT-5.5 is strongest when the prompt defines the target outcome, success criteria, constraints, and available context, then lets the model choose the path." — OpenAI Official Docs
+  </div>
+
+  <h3>The instructions Parameter vs. System Role</h3>
+  <p>OpenAI's Responses API now offers an <strong>instructions</strong> parameter separate from the messages array system role. Both exist; the instructions parameter carries higher-level authority for behavior (tone, goals, response style), while system-role messages handle task-specific context.</p>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>GPT-5.5 SYSTEM PROMPT — OUTCOME-FIRST FORMULA</span>
+      <span class="platform-chip chip-openai">OpenAI</span>
+    </div>
+    <pre><code><span class="cmt"># instructions parameter (high-level authority)</span>
+{
+  <span class="key">"instructions"</span>: <span class="str">"[ROLE]. [What success looks like for every output. 
+  Tone + voice spec. NOT a step-by-step process.]"</span>
+}
+
+<span class="cmt"># system message (task-specific)</span>
+{
+  <span class="key">"role"</span>: <span class="str">"system"</span>,
+  <span class="key">"content"</span>: <span class="str">"
+## Outcome
+[What good output achieves — specific and verifiable]
+
+## Constraints
+[Hard limits with measurable values: ≤N words, JSON only, etc.]
+
+## Available Context
+[What data/tools the model has access to]
+
+## Output must contain
+[Required elements — binary list]
+
+## What to skip
+[Remove step-by-step process guidance — GPT-5.5 finds the path]
+[Remove output schema prompting where Structured Outputs is available]
+[Do NOT include current date — model is UTC-date-aware]
+  "</span>
+}</code></pre>
+  </div>
+
+  <h3>GPT-5.5 — What Changed vs Earlier Models</h3>
+
+  <div class="rule-block">
+    <div class="rule-block-title warn">Remove From Old Prompts</div>
+    <div class="rule-block-body">
+      <ul>
+        <li>Detailed step-by-step process guidance (GPT-5.5 chooses the path)</li>
+        <li>Output schema definitions injected into the prompt (use Structured Outputs API instead)</li>
+        <li>Current date injection (model is already UTC-date-aware)</li>
+        <li>Every instruction ported from GPT-4.1, o3, or GPT-5.4 stacks</li>
+        <li>Mechanical reasoning scaffolds — they narrow the search space</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-block-title good">Add to GPT-5.5 Prompts</div>
+    <div class="rule-block-body">
+      <ul>
+        <li>Outcome definition: what does the finished product look like?</li>
+        <li>Success criteria: how would you know if the output is wrong?</li>
+        <li>Explicit constraints with measurable values</li>
+        <li>Cache optimization: static instructions first, dynamic user content last</li>
+        <li>For coding tasks: define the agent's role, enforce structured tool use with examples, require thorough testing</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>GPT-5.5 FRONTEND GENERATION — VERIFIED WORKING PATTERN</span>
+      <span class="platform-chip chip-openai">OpenAI</span>
+    </div>
+    <pre><code><span class="str">"You are a world class web developer, capable of producing stunning, 
+interactive, and innovative websites from scratch in a single prompt. 
+You excel at delivering top-tier one-shot solutions. Your process:
+
+Step 1: Create an evaluation rubric and refine it until confident.
+Step 2: Consider every element that defines a world-class one-shot web app,  
+        create a &lt;ONE_SHOT_RUBRIC&gt; with 5–7 categories. Keep hidden.
+Step 3: Apply the rubric. Iterate until highest standard is met.
+Step 4: Aim for simplicity while fully achieving the goal. 
+        Avoid external dependencies like Next.js or React.
+
+[THIS PATTERN IS SOURCED FROM OFFICIAL OPENAI PLATFORM DOCS — MAY 2026]"</span></code></pre>
+  </div>
+
+  <p>For model strings in production: <span class="mono">gpt-5.5-2026-04-23</span> — pin to snapshot versions. Legacy IDs like <span class="mono">gpt-4o</span> were retired Feb 2026.</p>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part5">
+  <div class="section-label">05</div>
+  <h2>Google Gemini 3.x — system_instruction Hierarchy</h2>
+  <div class="tags">
+    <span class="tag-pill active">Gemini 3.1 Pro</span>
+    <span class="tag-pill active">Gemini 3.0 Flash</span>
+    <span class="tag-pill">Vertex AI</span>
+    <span class="tag-pill">Google AI Studio</span>
+  </div>
+
+  <p>Gemini's API uses <strong>system_instruction</strong> as the canonical top-level behavioral parameter. As of Gemini 3 (released Nov 2025), thinking is controlled via a <strong>thinking_level</strong> parameter — not a separate model. Current active models as of May 2026: Gemini 3.1 Pro, Gemini 3.0 Flash, and gemini-3.5-flash.</p>
+
+  <div class="callout info">
+    <strong>Constraint Placement Rule (Official Gemini 3 Docs):</strong> Place behavioral constraints and role definitions in the System Instruction or at the very top of the prompt to anchor the model's reasoning process. For long contexts (books, codebases, long videos), place specific instructions at the <em>end</em> of the prompt, after the data context.
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>GEMINI API — SYSTEM INSTRUCTION FORMAT (PYTHON SDK)</span>
+      <span class="platform-chip chip-gemini">Gemini</span>
+    </div>
+    <pre><code><span class="kw">from</span> google <span class="kw">import</span> genai
+
+client = genai.Client()
+
+response = client.models.generate_content(
+  model=<span class="str">"gemini-3.1-pro"</span>,
+  config={
+    <span class="key">"system_instruction"</span>: <span class="str">"""
+      [ROLE]: [Specific role — not 'helpful assistant']
+
+      [DOMAIN]: [What this governs. 1–2 sentences.]
+
+      [OUTPUT RULES]
+      - Format: [exact format specification]  
+      - Length: [measurable constraint]
+      - Required sections: [in order]
+      - Banned patterns: [grep-checkable list]
+
+      [QUALITY GATE]
+      Before returning output: confirm format, confirm constraints met,
+      confirm output is non-generic for this domain.
+    """</span>,
+    <span class="key">"thinking_config"</span>: {
+      <span class="key">"thinking_level"</span>: <span class="str">"HIGH"</span>
+      <span class="cmt"># Flash levels: MINIMAL | LOW | MEDIUM | HIGH</span>
+      <span class="cmt"># Pro levels: LOW | HIGH (HIGH is default)</span>
+    }
+  },
+  contents=<span class="str">"{{USER_INPUT}}"</span>
+)</code></pre>
+  </div>
+
+  <h3>Gemini 3 — Critical Behaviors</h3>
+
+  <div class="rule-block">
+    <div class="rule-block-title info">Gemini 3 Defaults</div>
+    <div class="rule-block-body">
+      <ul>
+        <li><strong>Output verbosity:</strong> Gemini 3 defaults to <em>less verbose</em>, preferring direct answers. Add "Provide comprehensive, detailed responses with full reasoning" if your use case requires it.</li>
+        <li><strong>Multimodal parity:</strong> Text, image, audio, and video are equal-class inputs. Reference specific modalities explicitly when synthesizing across them.</li>
+        <li><strong>Thinking levels:</strong> Gemini 3.0 Flash supports MINIMAL (fastest) through HIGH (most thorough). Gemini 3.1 Pro defaults to HIGH.</li>
+        <li><strong>Role names in chat:</strong> Gemini 2.5+ uses the "model" role, not "assistant". Older Gemini versions use "assistant". Check your SDK version.</li>
+        <li><strong>Long context:</strong> With large inputs, place your task instructions at the <em>END</em> of the prompt after the data — Gemini processes final instructions with higher weighting in long-context scenarios.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>GEMINI — VERTEX AI NODE.JS SYSTEM INSTRUCTION</span>
+      <span class="platform-chip chip-gemini">Gemini</span>
+    </div>
+    <pre><code><span class="kw">const</span> {VertexAI} = <span class="fn">require</span>(<span class="str">'@google-cloud/vertexai'</span>);
+<span class="kw">const</span> vertexAI = <span class="kw">new</span> <span class="fn">VertexAI</span>({project: projectId, location: <span class="str">'us-central1'</span>});
+
+<span class="kw">const</span> model = vertexAI.<span class="fn">getGenerativeModel</span>({
+  model: <span class="str">'gemini-3.1-pro'</span>,
+  systemInstruction: {
+    parts: [
+      {text: <span class="str">'[ROLE]: [Specific role, no boilerplate]'</span>},
+      {text: <span class="str">'[DOMAIN + CONSTRAINTS]: [Rules with exact values]'</span>},
+      {text: <span class="str">'[QUALITY GATE]: Before returning output, verify: ...'</span>},
+    ],
+  },
+  generationConfig: {
+    thinkingConfig: { thinkingBudget: <span class="num">8192</span> }  <span class="cmt">// or thinking_level: "HIGH"</span>
+  }
+});</code></pre>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part6">
+  <div class="section-label">06</div>
+  <h2>DeepSeek V4 — XML Context & Thinking Modes</h2>
+  <div class="tags">
+    <span class="tag-pill active">DeepSeek V4-Pro</span>
+    <span class="tag-pill active">DeepSeek V4-Flash</span>
+    <span class="tag-pill">DeepThink mode</span>
+    <span class="tag-pill">Open Weight / MIT</span>
+  </div>
+
+  <p>DeepSeek V4 (released April 24, 2026) is a 1.6T parameter MoE model with 49B active per token (Pro) or 284B/13B active (Flash). <strong>Critical migration note:</strong> legacy model IDs <span class="mono">deepseek-chat</span> and <span class="mono">deepseek-reasoner</span> are retired <span class="mono">2026-07-24 15:59 UTC</span> — switch to <span class="mono">deepseek-v4-pro</span> or <span class="mono">deepseek-v4-flash</span>.</p>
+
+  <div class="callout info">
+    <strong>Thinking Mode is now a parameter, not a model.</strong> Both V4-Pro and V4-Flash share the same feature set. Toggle thinking mode via the API request parameter: <code>thinking: { effort: "high" | "max" | "disabled" }</code>. Default is <code>high</code>.
+  </div>
+
+  <h3>Two Fundamentally Different Prompting Strategies by Mode</h3>
+
+  <div class="platform-grid">
+    <div class="pcard deepseek">
+      <div class="pcard-name">V4-Flash / Chat Mode</div>
+      <div class="pcard-model">deepseek-v4-flash · general tasks · 83 tok/s</div>
+      <p style="font-size:12px; color:rgba(232,232,240,0.7)">Behaves like GPT-5.5 / Claude Sonnet for structured tasks. Use the System Prompt aggressively. Role-playing works well. Respects system prompt for behavior locking. XML tagging for structured context yields 92% task success vs 45% for unstructured input. Place static context first, enable context caching for 90% cost reduction on repeated prefixes.</p>
+    </div>
+    <div class="pcard deepseek">
+      <div class="pcard-name">V4-Pro / DeepThink Mode</div>
+      <div class="pcard-model">deepseek-v4-pro · reasoning · 80.6% SWE-bench</div>
+      <p style="font-size:12px; color:rgba(232,232,240,0.7)">Keep system prompt lighter. Thinking mode occasionally skips reasoning phase — add: "Always show reasoning steps before final answer." Verify JSON mode with explicit demand in prompt text even when API JSON mode is enabled. Use prefix completion to guide first tokens. State what the agent must never do explicitly for agentic tasks.</p>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>DEEPSEEK V4 — XML-TAGGED SYSTEM PROMPT</span>
+      <span class="platform-chip chip-deepseek">DeepSeek</span>
+    </div>
+    <pre><code><span class="cmt"># Base URL stays the same: https://api.deepseek.com/v1</span>
+<span class="cmt"># Model migration: deepseek-v4-pro or deepseek-v4-flash</span>
+
+{
+  <span class="key">"model"</span>: <span class="str">"deepseek-v4-flash"</span>,
+  <span class="key">"messages"</span>: [
+    {
+      <span class="key">"role"</span>: <span class="str">"system"</span>,
+      <span class="key">"content"</span>: <span class="str">"
+<span class="tag">&lt;role&gt;</span>
+  [Specific role with concrete expertise area and credentials]
+<span class="tag">&lt;/role&gt;</span>
+
+<span class="tag">&lt;instructions&gt;</span>
+  [Core behavioral rules — XML-tagged context gets 92% task success]
+  [State tone, domain, forbidden patterns]
+  [For structured outputs: explicitly demand format in text
+   even when JSON mode is enabled in API params]
+<span class="tag">&lt;/instructions&gt;</span>
+
+<span class="tag">&lt;output_rules&gt;</span>
+  FORMAT: [exact specification]
+  LENGTH: [measurable constraint]
+  NEVER: [banned_pattern_1]
+  NEVER: [banned_pattern_2]
+<span class="tag">&lt;/output_rules&gt;</span>
+
+<span class="tag">&lt;safety&gt;</span>
+  [For agentic tasks: explicitly state what the agent must NEVER do]
+  [State success condition clearly]
+<span class="tag">&lt;/safety&gt;</span>
+      "</span>
+    },
+    {
+      <span class="key">"role"</span>: <span class="str">"user"</span>,
+      <span class="key">"content"</span>: <span class="str">"{{USER_INPUT}}"</span>
+    }
+  ],
+  <span class="key">"thinking"</span>: {
+    <span class="key">"effort"</span>: <span class="str">"high"</span>  <span class="cmt">// "high" | "max" | "disabled" — was separate model ID</span>
+  }
+}</code></pre>
+  </div>
+
+  <h3>DeepSeek Context Caching</h3>
+  <p>DeepSeek's architecture uses disk-based context caching. Sending the same long prefix multiple times routes at <strong>~90% cost reduction</strong>. Place static documentation, codebases, or skill rules at the very top of the system prompt, user content at the bottom.</p>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part7">
+  <div class="section-label">07</div>
+  <h2>Open-Weight Models — Meta Llama 4 / Mistral / Qwen 3</h2>
+  <div class="tags">
+    <span class="tag-pill active">Llama 4 Scout / Maverick</span>
+    <span class="tag-pill active">Mistral Large 3</span>
+    <span class="tag-pill active">Qwen 3</span>
+    <span class="tag-pill">Ollama / vLLM / Groq</span>
+  </div>
+
+  <div class="callout info">
+    <strong>Key difference for open-weight models:</strong> You control the chat template. The system prompt does not get pre-wrapped by a safety layer. This means more precise behavioral control but also means you must explicitly handle output formatting — the model will not auto-sanitize.
+  </div>
+
+  <div class="platform-grid">
+    <div class="pcard meta">
+      <div class="pcard-name">Meta Llama 4</div>
+      <div class="pcard-model">llama-4-scout · llama-4-maverick · April 2025</div>
+      <p style="font-size:12px; color:rgba(232,232,240,0.7);">Uses standard <strong>ChatML format</strong> with &lt;|system|&gt; / &lt;|user|&gt; / &lt;|assistant|&gt; tokens. Llama 4 Maverick supports native multimodality. System prompt placement matters: Llama 4 respects system-role instructions at high priority. Long system prompts with clearly separated sections perform best. The Meta Llama prompting guide recommends clear, direct statements over hedged instructions.</p>
+    </div>
+    <div class="pcard mistral">
+      <div class="pcard-name">Mistral Large 3</div>
+      <div class="pcard-model">mistral-large-3 · 128k context · function calling</div>
+      <p style="font-size:12px; color:rgba(232,232,240,0.7);">Uses <strong>[INST] / [/INST] template</strong> at the inference level but the API abstracts this to standard role format. Mistral Large 3 responds strongly to numbered step instructions and role declarations. Structured outputs via JSON mode are stable. For tool use, provide few-shot examples of correct tool call format. Mistral processes dense system prompts well — no token penalty for specificity.</p>
+    </div>
+    <div class="pcard qwen">
+      <div class="pcard-name">Qwen 3</div>
+      <div class="pcard-model">qwen3-235b-a22b · MoE · /think mode</div>
+      <p style="font-size:12px; color:rgba(232,232,240,0.7);">Qwen 3 has two modes: <strong>/think</strong> (extended reasoning, like DeepSeek's DeepThink) and <strong>/no_think</strong> (fast chat). Prepend your user message with /think or /no_think to force the mode. System prompts work in standard JSON format. XML tags for context structure are supported and improve extraction accuracy. Qwen 3 235B-A22B activates 22B parameters per token at inference.</p>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>UNIVERSAL OPEN-WEIGHT SYSTEM PROMPT PATTERN</span>
+      <span class="chip-all">Llama 4 · Mistral · Qwen 3</span>
+    </div>
+    <pre><code>{
+  <span class="key">"role"</span>: <span class="str">"system"</span>,
+  <span class="key">"content"</span>: <span class="str">"""
+## Role
+[Specific role with domain expertise — never "helpful assistant"]
+
+## Domain
+[What this covers. Hard scope limits stated explicitly.]
+
+## Output Specification
+- Format: [exact — markdown | JSON | plain text | code]
+- Length: [measurable — ≤N words, N paragraphs, exact schema]
+- Required: [binary list of must-have elements]
+- Banned: [grep-checkable anti-patterns]
+
+## Execution
+1. [Step with imperative verb]
+2. [Next step]
+3. [Final step: deliver output matching spec]
+
+## Quality Check
+Before output: Format matches spec? Constraints met? Non-generic?
+  """</span>
+}
+
+<span class="cmt"># For Qwen 3 — prepend user message to control mode:</span>
+{<span class="key">"role"</span>: <span class="str">"user"</span>, <span class="key">"content"</span>: <span class="str">"/think [USER_TASK_HERE]"</span>}
+<span class="cmt"># or</span>
+{<span class="key">"role"</span>: <span class="str">"user"</span>, <span class="key">"content"</span>: <span class="str">"/no_think [USER_TASK_HERE]"</span>}</code></pre>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part8">
+  <div class="section-label">08</div>
+  <h2>Cross-Platform Skill Template (Copy-Deploy)</h2>
+  <p>This template is designed to be adapted into any platform's native format with minimum editing. The core logic is platform-agnostic; the wrapper syntax is what changes per platform.</p>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>PRODUCTION SKILL — CROSS-PLATFORM MASTER</span>
+      <span class="chip-all">All Models</span>
+    </div>
+    <pre><code><span class="cmt"># ═══════════════════════════════════════════════════
+# SKILL: [SKILL-NAME]
+# Target: [Claude .skill | GPT-5.5 API | Gemini API | DeepSeek V4 | Open-weight]
+# Version: [pin your model string here]
+# Date: [pin date — model behavior changes on deployment]
+# ═══════════════════════════════════════════════════</span>
+
+<span class="cmt">## IDENTITY</span>
+You are [SPECIFIC ROLE]. [One sentence of domain context. No hedging, no filler.]
+
+<span class="cmt">## DOMAIN SCOPE</span>
+This skill governs: [explicit domain — 1–2 sentences]
+In scope: [bullet list]
+Out of scope: [bullet list — do not leave implicit]
+
+<span class="cmt">## OUTPUT CONTRACT (HARD CONSTRAINTS)</span>
+Every output from this skill must:
+<span class="str">- Format: [exact format specification]
+- Length: [measurable value — not "concise" or "detailed"]
+- Structure: [required sections in order, named]
+- End with: [required final element if applicable]</span>
+
+<span class="cmt">## DIVERGENCE AXES (production-grade enforcement)</span>
+<span class="cmt"># Name the axes where output MUST diverge from statistical average.</span>
+<span class="cmt"># These are your quality differentiators. Zero vague axes.</span>
+AXIS_1 — [Name]: [Exact constraint, e.g. "Never use placeholder variable names — all code uses domain-specific naming"]
+AXIS_2 — [Name]: [Exact constraint]
+AXIS_3 — [Name]: [Exact constraint — minimum 3 for production]
+
+<span class="cmt">## BANNED PATTERNS</span>
+<span class="cmt"># Each entry must be specific enough to fail a grep check.</span>
+NEVER: [exact phrase or pattern — not "generic output"]
+NEVER: [pattern 2]
+NEVER: [pattern 3]
+NEVER: Use boilerplate introductions ("Certainly!", "Great question!", "Of course!")
+NEVER: Leave output format undefined — always match contract
+
+<span class="cmt">## EXECUTION SEQUENCE</span>
+1. Parse [input component] and identify [key element].
+2. Apply [AXIS_1 rule] to [specific part of output].
+3. Apply [AXIS_2 rule] and [AXIS_3 rule].
+4. Run internal quality gate (see below).
+5. Return output matching OUTPUT CONTRACT exactly.
+
+<span class="cmt">## QUALITY GATE (self-check before returning)</span>
+□ Format matches OUTPUT CONTRACT exactly
+□ Length within specified constraint  
+□ No BANNED PATTERNS present in output
+□ All 3 DIVERGENCE AXES visibly enforced
+□ Output does not read as statistically average for this domain
+□ [Domain-specific gate — add 1–3 per skill]
+
+<span class="cmt">## EXAMPLES</span>
+<span class="tag">&lt;example&gt;</span>
+  INPUT:  [representative task]
+  OUTPUT: [ideal response — this anchors model behavior]
+<span class="tag">&lt;/example&gt;</span>
+
+<span class="cmt">## FALLBACK BEHAVIOR</span>
+IF ambiguous: State one clarifying assumption, proceed with it.
+IF out of scope: Respond with "[REDIRECT MESSAGE]" — do not leave user without direction.
+
+<span class="cmt">## CONTEXT ZONE (place user/dynamic input here — cache optimization)</span>
+{{USER_INPUT}}</code></pre>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part9">
+  <div class="section-label">09</div>
+  <h2>Production-Grade Directives — Awwwards / Behance Level</h2>
+  <p>These directives push any model past boilerplate defaults toward genuinely designed, production-ready output. They apply especially to UI, creative, and frontend skills.</p>
+
+  <div class="rule-block">
+    <div class="rule-block-title accent">The Anti-Convergence Rule</div>
+    <div class="rule-block-body">
+      <ul>
+        <li>Generic instructions like "make it modern" or "clean design" route every model to the same statistical cluster. They produce the same output every time.</li>
+        <li>Instead: Name the aesthetic explicitly. "Cold monochrome atmosphere using pale silver-gray tones that deepen into blue-gray and near-black" (verified from Anthropic Opus 4.7 docs) produces a specific, reproducible result.</li>
+        <li>For typography: name the actual font pairing, sizes, weights. "Distinctive" is not a directive. "Fraunces 800 display + DM Mono 400 body at 14px/1.7" is.</li>
+        <li>For motion: specify timing functions and trigger conditions. "smooth animation" produces CSS ease. "cubic-bezier(0.16, 1, 0.3, 1) entering at scroll-threshold 20%" produces crafted choreography.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="code-block">
+    <div class="code-block-header">
+      <span>AWWWARDS-LEVEL UI SKILL BLOCK — DESIGN DIRECTIVES</span>
+      <span class="chip-all">All Models</span>
+    </div>
+    <pre><code><span class="cmt">## DESIGN SYSTEM (for UI/frontend skills)</span>
+
+<span class="cmt">### Typography</span>
+Display font: [specific font, weight, size — not "a nice serif"]
+Body font: [specific font, weight, size, line-height]
+Banned: Inter, Roboto, Arial, system-ui — these are statistical defaults
+Banned: "a modern sans-serif" — this is not a specification
+
+<span class="cmt">### Color Architecture</span>
+Background: [hex value — not "dark theme" or "light mode"]
+Primary accent: [hex]
+Secondary accent: [hex]
+Text: [hex]
+Banned: purple-on-white gradients (the most common AI default)
+Banned: stock "developer blue" (#0066CC variants) without explicit request
+
+<span class="cmt">### Spatial Composition</span>
+Layout: [asymmetric | centered | editorial split | brutalist grid | etc.]
+Spacing scale: [exact values or ratio — not "generous whitespace"]
+Grid-breaking elements: [yes/no — if yes, describe where]
+
+<span class="cmt">### Motion Choreography</span>
+Entry animation: [property + duration + easing — exact values]
+Hover state: [exact transition spec]
+Page load: [staggered reveal timing — e.g. 0ms, 80ms, 160ms offsets]
+Banned: ease-in-out on everything (the default)
+Banned: animation for decoration only — every motion must convey state
+
+<span class="cmt">### Atmosphere</span>
+Background treatment: [gradient mesh | noise texture | geometric pattern | flat | etc.]
+Depth cues: [shadows, layering, blur — exact values]
+NO default to: solid color backgrounds without atmosphere layer</code></pre>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-block-title accent">Constraint-Based Directives That Produce Exceptional Output</div>
+    <div class="rule-block-body">
+      <ul>
+        <li><strong>"What makes this UNFORGETTABLE?"</strong> — Instruct the model to answer this question before coding. Force a divergence commitment before any execution begins.</li>
+        <li><strong>The one-thing rule:</strong> "Name the one thing someone will remember about this interface." Forces specificity away from averaged outputs.</li>
+        <li><strong>Negative space as a system:</strong> Specify negative space explicitly. "64px section margins, 40px component gaps, 24px internal padding" beats "generous whitespace".</li>
+        <li><strong>Reference without reproduction:</strong> "Design in the spirit of the Brutalist Web Design movement — raw typography, minimal color, deliberate roughness — without reproducing any existing site." Directs aesthetic without risking IP issues.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part10">
+  <div class="section-label">10</div>
+  <h2>Banned Patterns & Anti-Boilerplate Enforcement</h2>
+  <p>The following patterns are the most common failure modes across all platforms. Include platform-appropriate versions of this list in every production skill.</p>
+
+  <div class="compare-table-wrap" style="overflow-x:auto; margin: 20px 0;">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Banned Pattern</th>
+          <th>Why It Fails</th>
+          <th>Replacement Directive</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>"Certainly! I'd be happy to..."</td>
+          <td>Sycophantic opener. Zero information density. Signals average output ahead.</td>
+          <td>Begin output at the first meaningful token. No preamble.</td>
+        </tr>
+        <tr>
+          <td>"Here's a [X] for you:"</td>
+          <td>Narrates the meta-action instead of executing it.</td>
+          <td>Execute immediately. No meta-narration.</td>
+        </tr>
+        <tr>
+          <td>"Please note that..." / "It's important to..."</td>
+          <td>Hedge scaffolding. Pads length, reduces signal density.</td>
+          <td>State the constraint directly: "[CONSTRAINT]"</td>
+        </tr>
+        <tr>
+          <td>Over-specified step-by-step on GPT-5.5</td>
+          <td>Narrows reasoning search space on outcome-capable models.</td>
+          <td>Describe the destination. Let GPT-5.5 find the route.</td>
+        </tr>
+        <tr>
+          <td>Untagged context in DeepSeek prompts</td>
+          <td>45% task success vs 92% with XML tags.</td>
+          <td>Wrap all context in &lt;semantic_label&gt; XML tags.</td>
+        </tr>
+        <tr>
+          <td>Generic override on Opus 4.7 design</td>
+          <td>"Don't use cream" routes to another fixed palette, not variety.</td>
+          <td>Specify concrete hex values and named font families.</td>
+        </tr>
+        <tr>
+          <td>Skill description truncated for "brevity"</td>
+          <td>Missing trigger phrases = skill doesn't fire. Description length has no quality correlation.</td>
+          <td>Include ≥3 explicit trigger phrases. Full spec required.</td>
+        </tr>
+        <tr>
+          <td>Vague banned pattern entries</td>
+          <td>"Bad output" cannot be checked by inspection or grep. Unenforceable = ignored.</td>
+          <td>Every ban must pass a grep check. Quote the literal pattern.</td>
+        </tr>
+        <tr>
+          <td>Legacy model IDs in production</td>
+          <td>deepseek-chat, deepseek-reasoner retire 2026-07-24. gpt-4o retired Feb 2026.</td>
+          <td>Pin to current snapshot: deepseek-v4-pro, gpt-5.5-2026-04-23, etc.</td>
+        </tr>
+        <tr>
+          <td>Injecting current date into GPT-5.5 prompts</td>
+          <td>Model is already UTC-date-aware. Wastes tokens and can conflict.</td>
+          <td>Remove date injection. Use dynamic slots only for task-specific data.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ──────────────────────────────── -->
+<div class="section" id="part11">
+  <div class="section-label">11</div>
+  <h2>The QA Gate — Zero-Error Verification Checklist</h2>
+  <p>Run every skill through this checklist before deployment. Every item is binary — pass or fail. No partial credit.</p>
+
+  <div class="rule-block">
+    <div class="rule-block-title good">Universal Pre-Deployment Checklist</div>
+    <div class="rule-block-body">
+      <ul>
+        <li>☐ <strong>Model string pinned</strong> — exact snapshot version specified, no generic ID</li>
+        <li>☐ <strong>Format constraint is measurable</strong> — not "concise," not "detailed" — exact value</li>
+        <li>☐ <strong>≥3 banned patterns</strong> — each passes a grep check, no vague entries</li>
+        <li>☐ <strong>≥3 divergence axes named</strong> — domain-specific, not template-copied</li>
+        <li>☐ <strong>Quality gate present</strong> — model instructed to self-verify before output</li>
+        <li>☐ <strong>Context placement correct</strong> — static instructions first, dynamic content last</li>
+        <li>☐ <strong>Fallback behavior defined</strong> — explicit redirect for out-of-scope, no silent failure</li>
+        <li>☐ <strong>At least 1 example provided</strong> — input/output pair that anchors model behavior</li>
+        <li>☐ <strong>No boilerplate openers present</strong> — no "Certainly!", no "Here's X for you"</li>
+        <li>☐ <strong>Platform-specific rules applied</strong> — see per-platform notes above</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-block-title warn">Claude-Specific Pre-Deployment</div>
+    <div class="rule-block-body">
+      <ul>
+        <li>☐ YAML line 1: exactly <span class="mono">---</span></li>
+        <li>☐ YAML line 2: <span class="mono">name:</span> in kebab-case, matches folder name and .skill filename</li>
+        <li>☐ YAML line 3: <span class="mono">description:</span> is one unbroken line, ≥3 trigger phrases, ends with push-instruction</li>
+        <li>☐ No YAML block scalars (<span class="mono">&gt;</span> or <span class="mono">|</span>) in frontmatter</li>
+        <li>☐ SKILL.md sits at zip root, not inside a subfolder</li>
+        <li>☐ If targeting Opus 4.7: effort level specified, design axes use concrete hex+font values</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-block-title info">OpenAI GPT-5.5 Specific</div>
+    <div class="rule-block-body">
+      <ul>
+        <li>☐ Prompt is outcome-first — success condition defined before execution logic</li>
+        <li>☐ No step-by-step process guide (unless the specific path is a product requirement)</li>
+        <li>☐ Output schemas removed from prompt — Structured Outputs API used instead</li>
+        <li>☐ Date injection removed — model is UTC-aware</li>
+        <li>☐ Legacy model IDs replaced with current snapshot strings</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rule-block">
+    <div class="rule-block-title info">Gemini / DeepSeek / Open-Weight Specific</div>
+    <div class="rule-block-body">
+      <ul>
+        <li>☐ Gemini: <span class="mono">system_instruction</span> parameter used, not injected into messages array</li>
+        <li>☐ Gemini: thinking_level parameter set explicitly (not relying on default)</li>
+        <li>☐ Gemini long-context: task instructions placed at END of prompt after data context</li>
+        <li>☐ DeepSeek: context wrapped in XML tags (2x task success improvement)</li>
+        <li>☐ DeepSeek: JSON mode explicitly demanded in prompt text even when API JSON mode is on</li>
+        <li>☐ DeepSeek V4: model ID updated from legacy strings (retirement date: 2026-07-24)</li>
+        <li>☐ Qwen 3: /think or /no_think prefix added to user message if mode control is needed</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FINAL NOTES -->
+  <div class="callout tip">
+    <strong>The production differentiator is not the template — it's the constraints.</strong><br>
+    Every model will produce average output when given average instructions. The skill is the set of specific, verifiable, domain-vocabulary rules that force divergence from the statistical mean. Name the axes. Measure the output. Iterate against a benchmark, not a feeling.
+  </div>
+</div>
+
+</div><!-- /content -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-text">Universal Skill Formula · Cross-Verified · May 2026</div>
+  <div class="footer-text">Sources: Anthropic Docs · OpenAI Platform · Google AI Dev · DeepSeek AI Guide · Official SDKs</div>
+</div>
+
+</div><!-- /wrapper -->
+
+</body>
+</html>
